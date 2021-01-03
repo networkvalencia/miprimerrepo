@@ -14,7 +14,7 @@ print ("mi nombre es {0}" .format(mistring))
 #numeros
 
 print (type (9.99))
-
+#
 
 #edad = input ("introduce tu edad: ")
 
