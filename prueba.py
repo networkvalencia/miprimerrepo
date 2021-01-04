@@ -110,6 +110,7 @@ while contador < 10 :
     contador = contador + 1
 
 #FUNCIONES
+#
         
 def funcion (parametro1, parametro2):
     return (parametro1 + parametro2)
