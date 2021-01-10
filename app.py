@@ -1,4 +1,5 @@
 from tkinter import *
+import parser
 
 root = Tk()
 root.title("Calculadora")
@@ -25,6 +26,32 @@ def obtener_operacion(operacion):
 def limpiar_pantalla():
     display.delete(0, END)
 
+    #borrar 
+def borrar_ultimo():
+    display_state = display.get()
+    if len(display_state)>1:
+        display_new_state = display_state[:-1]
+        limpiar_pantalla()
+        display.insert(0, display_new_state)
+    else:
+        limpiar_pantalla()
+        display.insert(0,'Error')
+
+#evaluar 
+def calcula():
+    display_state = display.get()
+   # try:
+    expresion_matematica = parser.expr(display_state).compile()
+    result = eval(expresion_matematica)
+    limpiar_pantalla()
+    display.insert(0,result)
+   # except expresion_matematica as identifier:
+ #       clear.display()
+  #      display.inser(0, 'Error')
+      
+
+
+
 #botones numericos
 
 Button(root, text="1", command=lambda:obtener_numeros_o_simbolos(1)).grid(row=2, column=0, sticky=W+E)
@@ -48,12 +75,12 @@ Button(root, text="-", command=lambda:obtener_numeros_o_simbolos("-")).grid(row=
 Button(root, text="*", command=lambda:obtener_numeros_o_simbolos("*")).grid(row=4, column=3, sticky=W+E)
 Button(root, text="/", command=lambda:obtener_numeros_o_simbolos("/")).grid(row=5, column=3, sticky=W+E)
 
-Button(root, text="←").grid(row=6, column=3, sticky=W+E)
+Button(root, text="←", command =lambda:borrar_ultimo()).grid(row=6, column=3, sticky=W+E)
 Button(root, text="exp", command=lambda:obtener_numeros_o_simbolos("exp")).grid(row=6, column=2, sticky=W+E)
 Button(root, text="*2", command=lambda:obtener_numeros_o_simbolos("**2")).grid(row=6, column=1, sticky=W+E)
 Button(root, text="(", command=lambda:obtener_numeros_o_simbolos("(")).grid(row=6, column=0, sticky=W+E)
 Button(root, text=")", command=lambda:obtener_numeros_o_simbolos(")")).grid(row=7, column=1, sticky=W+E)
-Button(root, text="=").grid(row=7, column=0, sticky=W+E)
+Button(root, text="=", command =lambda:calcula()).grid(row=7, column=0, sticky=W+E)
 
 
 
